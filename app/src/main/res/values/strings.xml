@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Farm Monitor</string>
+
+
+    <!-- SECTOR 1 -->
+    <string name="sector1">Sector</string>
+    <string name="descripcionCorta">Sector 1 de la hacienda El Camino.</string>
+    <string name="descripcionLarga">Temperatura: El rango óptimo de temperatura durante la fructificación debe oscilar en torno a
+        los 15-20ºC de media anual. Temperaturas por debajo de 12ºC durante el cuajado dan lugar a frutos deformados por el frío.
+        Un periodo prolongado de tiempo muy caluroso (>25ºC), puede originar una maduración y coloración del fruto demasiado rápida,
+        lo cual le impide adquirir un tamaño adecuado para su comercialización. No obstante, el fresón necesita acumular una serie de
+        horas-frío, con temperaturas por debajo de 7ºC, para que su vegetación y fructificación sea abundante. Humedad: El rango
+        óptimo de humedad relativa oscila entre el 65 y 70%. Si la presencia de humedad es excesiva, favorece la presencia de
+        enfermedades, mientras que si es deficiente, provoca daños en la producción.
+        Luz: En cuanto a la luz, necesitan 12h de luz diarias para tener buena productividad.</string>
+</resources>
