@@ -17,9 +17,9 @@ import java.util.List;
 
 import com.parrot.sdksample.R;
 import com.parrot.sdksample.Rest.Interface.JsonApi;
-import com.parrot.sdksample.adaptadores.AdaptadorPersonajes;
-import com.parrot.sdksample.entidades.PersonajeVo;
-import com.parrot.sdksample.entidades.Transformacion;
+import com.parrot.sdksample.Rest.Model.Posts;
+import com.parrot.sdksample.adaptadores.AdaptadorSectores;
+import com.parrot.sdksample.entidades.sectorVO;
 import com.parrot.sdksample.interfaces.IComunicaFragments;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +37,7 @@ public class ListaPersonajesFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    ArrayList<PersonajeVo> listaPersonaje = new ArrayList<>();
+    ArrayList<sectorVO> listaPersonaje = new ArrayList<>();
     ;
 
     RecyclerView recyclerPersonajes;
@@ -101,7 +101,7 @@ public class ListaPersonajesFragment extends Fragment {
 
             @Override
             public void run() {
-                AdaptadorPersonajes adapter = new AdaptadorPersonajes(listaPersonaje);
+                AdaptadorSectores adapter = new AdaptadorSectores(listaPersonaje);
                 recyclerPersonajes.setAdapter(adapter);
 
                 adapter.setOnClickListener(new View.OnClickListener() {
@@ -124,31 +124,24 @@ public class ListaPersonajesFragment extends Fragment {
                     //.baseUrl("http://192.168.4.4:4000")
     private void llenarListaPersonajes(){
         Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("http://192.168.4.4:4000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonApi jsonApi = retrofit.create(JsonApi.class);
-        Call<List<Transformacion>> call = jsonApi.getPersonajes();
-        call.enqueue(new Callback<List<Transformacion>>() {
+        Call<List<Posts>> call = jsonApi.getPost();
+        call.enqueue(new Callback<List<Posts>>() {
             @Override
-            public void onResponse(Call<List<Transformacion>> call, Response<List<Transformacion>> response) {
+            public void onResponse(Call<List<Posts>> call, Response<List<Posts>> response) {
 
-                List<Transformacion> postsList = response.body();
-                Transformacion personaje = postsList.get(0);
-                for( int i=0; i< 6; i++ ) {
-                    personaje = postsList.get(i);
-                    PersonajeVo person = new PersonajeVo(  personaje.getTitle(), personaje.getTitle(), personaje.getTitle(),R.drawable.paisaje,R.drawable.paisaje);
-                    listaPersonaje.add(person);
-                    System.out.println(listaPersonaje.get(i).getDescripcion());
-
-
-
+                List<Posts> postsList = response.body();
+                int n =0;
+                for( Posts sensores: postsList) {
+                    sectorVO sensor = new sectorVO( "SECTOR: "+ ++n, "Temperatura: "+sensores.getTemperatura()+"  |  Humedad: "+ sensores.getHumedad(),getString(R.string.descripcionLarga),R.drawable.paisaje,R.drawable.paisaje);
+                    listaPersonaje.add(sensor);
                 }
-
-
             }
             @Override
-            public void onFailure(Call<List<Transformacion>> call, Throwable t) {
+            public void onFailure(Call<List<Posts>> call, Throwable t) {
                 Toast.makeText(getActivity(), "On failure",
                         Toast.LENGTH_LONG).show();
             }

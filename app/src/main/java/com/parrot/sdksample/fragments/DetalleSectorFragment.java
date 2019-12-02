@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parrot.sdksample.R;
-import com.parrot.sdksample.entidades.PersonajeVo;
+import com.parrot.sdksample.entidades.sectorVO;
 
 public class DetallePersonajeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -61,9 +61,9 @@ public class DetallePersonajeFragment extends Fragment {
         imagenDetalle= (ImageView) vista.findViewById(R.id.imagenDetalleId);
 
         Bundle objetoPersonaje=getArguments();
-        PersonajeVo miPersonaje=null;
+        sectorVO miPersonaje=null;
         if (objetoPersonaje != null) {
-            miPersonaje= (PersonajeVo) objetoPersonaje.getSerializable("objeto");
+            miPersonaje= (sectorVO) objetoPersonaje.getSerializable("objeto");
 
             asignarInformacion(miPersonaje);
 
@@ -72,7 +72,7 @@ public class DetallePersonajeFragment extends Fragment {
         return vista;
     }
 
-    public void asignarInformacion(PersonajeVo miPersonaje) {
+    public void asignarInformacion(sectorVO miPersonaje) {
         imagenDetalle.setImageResource(miPersonaje.getImagenDetalle());
         textDescripcion.setText(miPersonaje.getDescripcion());
     }
